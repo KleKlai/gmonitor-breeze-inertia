@@ -1,4 +1,6 @@
-<x-authentication-layout>
+@extends('layouts.authentication')
+
+@section('body')
     <div class="content-wrapper d-flex align-items-center auth px-0">
         <div class="row w-100 mx-0">
 
@@ -21,4 +23,4 @@
             </div>
         </div>
     </div>
-</x-authentication-layout>
+@endsection

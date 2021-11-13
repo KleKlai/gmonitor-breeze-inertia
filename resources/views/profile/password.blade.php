@@ -1,10 +1,6 @@
- <x-custom-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Classroom') }}
-        </h2>
-    </x-slot>
+@extends('layouts.custom')
 
+@section('body')
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -39,5 +35,4 @@
             </div>
         </div>
     </div>
-
-</x-custom-layout>
+@endsection

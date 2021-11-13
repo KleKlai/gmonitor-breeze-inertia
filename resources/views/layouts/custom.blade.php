@@ -26,7 +26,7 @@
 <body>
   <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
-    @include('layouts.sub-layout.top-nav-bar', array('pageTitle' => 'Dashboard'))
+    @include('layouts.sub-layout.top-nav-bar')
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:../../partials/_settings-panel.html -->
