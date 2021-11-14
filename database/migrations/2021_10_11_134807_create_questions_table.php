@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('classroom_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('question');
-            $table->string('answer_by');
+            $table->string('answer_by')->nullable();
             $table->string('visibility');
             $table->timestamps();
         });
