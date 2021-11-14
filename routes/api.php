@@ -7,6 +7,9 @@ use App\Http\Controllers\API\JoinController;
 use App\Http\Controllers\API\SearchController;
 use App\Http\Controllers\API\ClassroomController;
 use App\Http\Controllers\API\AttendanceController;
+use App\Http\Controllers\API\AnswerController;
+use App\Http\Controllers\API\AskController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/search', [SearchController::class, 'searchClassroom']);
     Route::get('/classroom-list', [ClassroomController::class, 'index']);
     Route::post('/attendance', [AttendanceController::class, 'recordAttendance']);
+    Route::post('/answer', [AnswerController::class, 'index']); //Receive answer from question ask by teacher
+    Route::post('/ask', [AskController::class, 'index']); //Receive question from the student
     Route::get('/logout', [AuthController::class, 'logout']);
 });

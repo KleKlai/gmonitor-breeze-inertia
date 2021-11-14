@@ -35,7 +35,11 @@
                             <td>{{ $classroom->code }}</td>
                             <td>{{ $classroom->users_count -1 }}</td>
                             <td>
-                                <a href="{{ route('open.attendance', $classroom)}}" class="btn btn-primary btn-rounded btn-fw">Open Attendance</a>
+                                @if($classroom->is_open == false)
+                                    <a href="{{ route('open.attendance', $classroom)}}" class="btn btn-primary btn-rounded btn-fw">Open Attendance</a>
+                                @else
+                                    <a href="{{ route('open.attendance', $classroom)}}" class="btn btn-danger btn-rounded btn-fw">Close Attendance</a>
+                                @endif
                                 <a href="{{ route('classroom.show', $classroom->id) }}" class="btn btn-link">Visit</a>
                             </td>
                         </tr>
