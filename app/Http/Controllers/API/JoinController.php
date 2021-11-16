@@ -42,7 +42,7 @@ class JoinController extends BaseController
 
         return $this->sendSuccess(
             ['classroom' => $classroom],
-            'joining a classroom successful'
+            'Joining a classroom successful'
         );
     }
 }

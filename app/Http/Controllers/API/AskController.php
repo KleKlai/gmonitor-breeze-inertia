@@ -13,8 +13,8 @@ class AskController extends Controller
 
         //Validate
         $request->validate([
-            'user_id'       => 'required, numeric',
-            'classroom_id'  => 'required, numeric',
+            'user_id'       => 'required, number',
+            'classroom_id'  => 'required, number',
             'question'      => 'required, string',
             'visibility'    => 'required',
         ]);

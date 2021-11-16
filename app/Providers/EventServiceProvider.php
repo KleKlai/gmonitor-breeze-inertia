@@ -20,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\NewQuestion' => [
             'App\Listeners\SendNewQuestionNotification'
+        ],
+        'App\Events\StudentAnswer' => [
+            'App\Listeners\SendStudentAnswerNotification'
         ]
     ];
 

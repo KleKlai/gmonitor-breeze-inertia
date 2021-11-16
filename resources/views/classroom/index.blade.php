@@ -21,7 +21,7 @@
                     <a class="nav-link" id="share-access-tab" data-bs-toggle="tab" href="#share-access" role="tab" aria-selected="false">Share Access</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link border-0" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab" aria-selected="false">Settings</a>
+                    <a class="border-0 nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab" aria-selected="false">Settings</a>
                 </li>
                 </ul>
                 <div>
@@ -111,7 +111,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                         <div class="statistics-details d-flex align-items-center justify-content-between">
-                            <div>
+                            {{-- <div>
                             <p class="statistics-title">Bounce Rate</p>
                             <h3 class="rate-percentage">32.53%</h3>
                             <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
@@ -140,7 +140,11 @@
                             <p class="statistics-title">Avg. Time on Site</p>
                             <h3 class="rate-percentage">2m:35s</h3>
                             <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
-                            </div>
+                            </div> --}}
+
+                            @foreach ($questions as $question)
+                                <question-answer :question="{{ $question }}"></question-answer>
+                            @endforeach
                         </div>
                         </div>
                     </div>
@@ -150,12 +154,12 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="col-lg-8 d-flex flex-column">
-                                <div class="row flex-grow">
+                                <div class="flex-grow row">
                                     <div class="col-12 grid-margin stretch-card">
                                         <div class="card card-rounded table-darkBGImg">
                                         <div class="card-body">
                                             <div class="col-sm-8">
-                                            <h3 class="text-white upgrade-info mb-0">
+                                            <h3 class="mb-0 text-white upgrade-info">
                                                 Share your <span class="fw-bold">Code</span> for better outreach
                                             </h3>
                                             <button value="{{ $classroom->code }}" id="classcode" onclick="copyToClipboard('{{ $classroom->code }}')" class="btn btn-info upgrade-btn">{{ $classroom->code }}</a>
@@ -190,7 +194,7 @@
                                         <label for="exampleInputEmail1">{{ "Section" }}</label>
                                         <input type="email" class="form-control" name="section" placeholder="Section" value="{{ $classroom->section }}">
                                     </div>
-                                    <button type="submit" class="btn btn-primary me-2 text-white">Save</button>
+                                    <button type="submit" class="text-white btn btn-primary me-2">Save</button>
                                 </form>
                                 </div>
                             </div>
@@ -204,9 +208,9 @@
                                     {{ "The classroom will be remove from student dashboard but all data will be retain." }}
                                 </p>
                                 @if($classroom->archive == false)
-                                    <a href="{{ route('archive-classroom', $classroom) }}" class="btn btn-warning me-2 text-white">ARCHIVE CLASS</a>
+                                    <a href="{{ route('archive-classroom', $classroom) }}" class="text-white btn btn-warning me-2">ARCHIVE CLASS</a>
                                 @else
-                                    <a href="{{ route('unarchive-classroom', $classroom) }}" class="btn btn-warning me-2 text-white">UNARCHIVE CLASS</a>
+                                    <a href="{{ route('unarchive-classroom', $classroom) }}" class="text-white btn btn-warning me-2">UNARCHIVE CLASS</a>
                                 @endif
                                 <p class="card-description">
                                     {{ "Once your classroom is deleted, all of its resources and data will be permanently deleted after 30 days. Before deleting your classroom, please download any data or information that you wish to retain." }}
@@ -215,7 +219,7 @@
 
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger me-2 text-white">DELETE CLASS</button>
+                                    <button type="submit" class="text-white btn btn-danger me-2">DELETE CLASS</button>
                                 </form>
                                 </div>
                             </div>

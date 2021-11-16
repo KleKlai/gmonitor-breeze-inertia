@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Events\StudentAnswer;
 use App\Models\Answer;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\BaseController;
 
-class AnswerController extends Controller
+class AnswerController extends BaseController
 {
     public function index(Request $request)
     {
@@ -21,24 +23,39 @@ class AnswerController extends Controller
 
         // Validation
         $request->validate([
-            'user_id'       => 'required, numeric',
-            'classroom_id'  => 'required, numeric',
-            'question_id'   => 'required, numeric',
-            'answer'        => 'required, string',
+            'user_id'       => 'required|numeric',
+            'classroom_id'  => 'required|numeric',
+            'question_id'   => 'required|numeric',
+            'answer'        => 'required|string',
             'visibility'    => 'required',
         ]);
 
-        Answer::create([
-            'user_id'       => $request->user,
-            'classroom_id'  => $request->classroom,
-            'question_id'   => $request->question,
+        $model = Answer::create([
+            'user_id'       => $request->user_id,
+            'classroom_id'  => $request->classroom_id,
+            'question_id'   => $request->question_id,
             'answer'        => $request->answer,
             'visibility'    => $request->visibility,
         ]);
 
-        return response()->json([
-            'Message'   => 'You are in the right path.',
-            'Data'      => $request->all(),
-        ]);
+        broadcast(new StudentAnswer($model))->toOthers();
+
+        // return response()->json([
+        //     'Message'   => 'You are in the right path.',
+        //     'Data'      => $request->all(),
+        // ]);
+        return $this->sendSuccess(
+            ['answer' => $model],
+            'Answer question successful'
+        );
+    }
+
+    public function get_answers($question_id) {
+        $model = Answer::where('question_id', $question_id)->get();
+
+        return $this->sendSuccess(
+            ['answers' => $model],
+            'Answers fetch successful'
+        );
     }
 }

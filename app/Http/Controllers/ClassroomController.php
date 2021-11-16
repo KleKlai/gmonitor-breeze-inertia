@@ -106,8 +106,9 @@ class ClassroomController extends Controller
         }
 
         $students = $classroom->students;
+        $questions = $classroom->questions;
 
-        return view('classroom.index', compact('classroom', 'students'));
+        return view('classroom.index', compact('classroom', 'students', 'questions'));
     }
 
     /**
