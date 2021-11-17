@@ -33,7 +33,7 @@ class StudentAnswer implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('answer.' . $this->answer->classroom_id);
+        return new Channel('answer.c' . $this->answer->classroom_id . 'q' . $this->answer->question_id);
     }
 
     public function broadcastAs()

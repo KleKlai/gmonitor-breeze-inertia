@@ -142,9 +142,52 @@
                             <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
                             </div> --}}
 
-                            @foreach ($questions as $question)
-                                <question-answer :question="{{ $question }}"></question-answer>
-                            @endforeach
+
+
+                            <div class="accordion w-100" id="accordionQuestions">
+                                @foreach ($questions as $question)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading-{{ $question['id'] }}">
+                                            <button
+                                                class="accordion-button"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#collapse-{{ $question['id'] }}"
+                                                aria-expanded="false"
+                                                aria-controls="collapse-{{ $question['id'] }}"
+                                            >
+                                                Answered: <span class="me-3 answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}">0</span> Question id #{{ $question['id'] }}: {{ $question['question'] }}
+                                            </button>
+                                        </h2>
+                                        <div
+                                            id="collapse-{{ $question['id'] }}"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="heading-{{ $question['id'] }}"
+                                            data-bs-parent="#accordionQuestions"
+                                        >
+                                            <div class="accordion-body bg-light">
+                                                Answers for question id #{{ $question['id'] }}
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            // pusher
+                                            let channel_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = pusher.subscribe("answer.c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
+                                            let answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = document.querySelector(".answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
+
+                                            channel_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.bind('answer.new', function(data) {
+                                                console.log('new answer: ', data);
+
+                                                oldVal = answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent;
+
+                                                answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent = parseInt(oldVal) + 1;
+                                            });
+                                            // pusher
+                                        </script>
+                                    </div>
+                                @endforeach
+                            </div>
+
                         </div>
                         </div>
                     </div>

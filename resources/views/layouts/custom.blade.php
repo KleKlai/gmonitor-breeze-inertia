@@ -21,6 +21,19 @@
   <link rel="stylesheet" href="{{ asset('asset/css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('asset/images/favicon.png') }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <script src="/js/pusher.min.js"></script>
+    <script>
+        Pusher.logToConsole = true;
+
+        let pusher = new Pusher('0134b0df47cadbe2fef4', {
+            cluster: 'mt1',
+        });
+
+        let oldVal = 0;
+    </script>
 </head>
 
 <body>
@@ -42,7 +55,7 @@
         <!-- partial:../../partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            {{--  <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>  --}}
+            {{--  <span class="float-none mt-1 text-center float-sm-right d-block mt-sm-0">Copyright © 2021. All rights reserved.</span>  --}}
           </div>
         </footer>
         <!-- partial -->
@@ -68,6 +81,9 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 
 </html>
