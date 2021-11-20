@@ -146,7 +146,7 @@
 
                             <div class="accordion w-100" id="accordionQuestions">
                                 @foreach ($questions as $question)
-                                    <div class="accordion-item">
+                                    <div class="my-2 accordion-item">
                                         <h2 class="accordion-header" id="heading-{{ $question['id'] }}">
                                             <button
                                                 class="accordion-button"
@@ -156,7 +156,30 @@
                                                 aria-expanded="false"
                                                 aria-controls="collapse-{{ $question['id'] }}"
                                             >
-                                                Answered: <span class="me-3 answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}">0</span> Question id #{{ $question['id'] }}: {{ $question['question'] }}
+                                                <table class="w-100">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="text-blue-600" style="font-size: 0.8rem;">
+                                                                    <div class="position-relative">
+                                                                        Question
+                                                                        <span class="top-0 position-absolute translate-middle badge rounded-pill bg-info">
+                                                                            <span class="text-black answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}">0</span>
+                                                                            <span class="visually-hidden">unread messages</span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="pt-2 text-black w-100">
+                                                                    {{ $question['question'] }}
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </button>
                                         </h2>
                                         <div
@@ -166,7 +189,19 @@
                                             data-bs-parent="#accordionQuestions"
                                         >
                                             <div class="accordion-body bg-light">
-                                                Answers for question id #{{ $question['id'] }}
+                                                <ul class="mt-2 mb-0 list-unstyled chat-list">
+                                                    @foreach ($question->answers as $answer)
+                                                        <li class="clearfix">
+                                                            <img src="{{ asset('asset/images/faces/face8.jpg') }}" alt="avatar">
+                                                            <div class="about">
+                                                                <div class="name">{{ $answer->user->name }}</div>
+                                                                <div class="status">
+                                                                    {{ $answer->answer }}
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
                                             </div>
                                         </div>
 
@@ -174,6 +209,8 @@
                                             // pusher
                                             let channel_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = pusher.subscribe("answer.c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
                                             let answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = document.querySelector(".answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
+
+                                            answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent = {{ $question->answers->count() }};
 
                                             channel_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.bind('answer.new', function(data) {
                                                 console.log('new answer: ', data);
@@ -184,6 +221,38 @@
                                             });
                                             // pusher
                                         </script>
+
+                                        <style>
+                                            .chat-list li {
+                                                padding: 10px 15px;
+                                                list-style: none;
+                                                border-radius: 3px;
+                                            }
+                                            .chat-list img {
+                                                width: 45px;
+                                                border-radius: 50%;
+                                                float: left;
+                                            }
+                                            .chat-list .about {
+                                                float: left;
+                                                padding-left: 8px;
+                                            }
+                                            .chat-list li .name {
+                                                font-size: 15px;
+                                            }
+                                            .chat-list .status {
+                                                color: #999;
+                                                font-size: 13px;
+                                            }
+                                            .clearfix:after {
+                                                visibility: hidden;
+                                                display: block;
+                                                font-size: 0;
+                                                content: " ";
+                                                clear: both;
+                                                height: 0;
+                                            }
+                                        </style>
                                     </div>
                                 @endforeach
                             </div>
