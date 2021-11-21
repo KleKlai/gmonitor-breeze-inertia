@@ -49,13 +49,4 @@ class AnswerController extends BaseController
             'Answer question successful'
         );
     }
-
-    public function get_answers($question_id) {
-        $model = Answer::where('question_id', $question_id)->get();
-
-        return $this->sendSuccess(
-            ['answers' => $model],
-            'Answers fetch successful'
-        );
-    }
 }

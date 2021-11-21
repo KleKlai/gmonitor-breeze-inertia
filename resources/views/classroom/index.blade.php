@@ -111,39 +111,6 @@
                     <div class="row">
                         <div class="col-sm-12">
                         <div class="statistics-details d-flex align-items-center justify-content-between">
-                            {{-- <div>
-                            <p class="statistics-title">Bounce Rate</p>
-                            <h3 class="rate-percentage">32.53%</h3>
-                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
-                            </div>
-                            <div>
-                            <p class="statistics-title">Page Views</p>
-                            <h3 class="rate-percentage">7,682</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
-                            </div>
-                            <div>
-                            <p class="statistics-title">New Sessions</p>
-                            <h3 class="rate-percentage">68.8</h3>
-                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
-                            </div>
-                            <div class="d-none d-md-block">
-                            <p class="statistics-title">Avg. Time on Site</p>
-                            <h3 class="rate-percentage">2m:35s</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
-                            </div>
-                            <div class="d-none d-md-block">
-                            <p class="statistics-title">New Sessions</p>
-                            <h3 class="rate-percentage">68.8</h3>
-                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
-                            </div>
-                            <div class="d-none d-md-block">
-                            <p class="statistics-title">Avg. Time on Site</p>
-                            <h3 class="rate-percentage">2m:35s</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
-                            </div> --}}
-
-
-
                             <div class="accordion w-100" id="accordionQuestions">
                                 @foreach ($questions as $question)
                                     <div class="my-2 accordion-item">
@@ -163,8 +130,8 @@
                                                                 <div class="text-blue-600" style="font-size: 0.8rem;">
                                                                     <div class="position-relative">
                                                                         Question
-                                                                        <span class="top-0 position-absolute translate-middle badge rounded-pill bg-info">
-                                                                            <span class="text-black answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}">0</span>
+                                                                        <span class="top-0 position-absolute translate-middle badge rounded-pill bg-primary">
+                                                                            <span class="answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}">0</span>
                                                                             <span class="visually-hidden">unread messages</span>
                                                                         </span>
                                                                     </div>
@@ -189,14 +156,18 @@
                                             data-bs-parent="#accordionQuestions"
                                         >
                                             <div class="accordion-body bg-light">
-                                                <ul class="mt-2 mb-0 list-unstyled chat-list">
+                                                <ul class="px-4 mt-2 mb-0 border list-unstyled answer-list answer-list-c{{ $question['classroom_id'] }}q{{ $question['id'] }} border-1 border-primary bg-primary" style="border-radius: 0.5rem;">
                                                     @foreach ($question->answers as $answer)
-                                                        <li class="clearfix">
-                                                            <img src="{{ asset('asset/images/faces/face8.jpg') }}" alt="avatar">
-                                                            <div class="about">
-                                                                <div class="name">{{ $answer->user->name }}</div>
-                                                                <div class="status">
-                                                                    {{ $answer->answer }}
+                                                        <li class="my-4 bg-transparent">
+                                                            <div class="d-inline-block">
+                                                                <div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">
+                                                                    <img src="{{ asset('asset/images/faces/face8.jpg') }}" alt="avatar">
+                                                                    <div class="flex-col d-flex" style="padding-left: 0.7rem;">
+                                                                        <div class="lh-base">
+                                                                            <div class="name">{{ $answer->user->name }}</div>
+                                                                            <div class="answer">{{ $answer->answer }}</div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -209,6 +180,7 @@
                                             // pusher
                                             let channel_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = pusher.subscribe("answer.c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
                                             let answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = document.querySelector(".answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
+                                            let answer_list_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = document.querySelector(".answer-list-c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
 
                                             answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent = {{ $question->answers->count() }};
 
@@ -218,41 +190,26 @@
                                                 oldVal = answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent;
 
                                                 answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent = parseInt(oldVal) + 1;
+
+                                                temp = '<div class="d-inline-block">';
+                                                temp += '<div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">';
+                                                temp += '<img src="/asset/images/faces/face8.jpg" alt="avatar">';
+                                                temp += '<div class="flex-col d-flex" style="padding-left: 0.7rem;">';
+                                                temp += '<div class="lh-base">';
+                                                temp += '<div class="name">' + data.answer.user_id + '</div>';
+                                                temp += '<div class="answer">' + data.answer.answer + '</div>';
+                                                temp += '</div>';
+                                                temp += '</div>';
+                                                temp += '</div>';
+                                                temp += '</div>';
+
+                                                item = document.createElement('li');
+                                                item.className = 'my-4 bg-transparent';
+                                                item.innerHTML = temp;
+                                                answer_list_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.appendChild(item);
                                             });
                                             // pusher
                                         </script>
-
-                                        <style>
-                                            .chat-list li {
-                                                padding: 10px 15px;
-                                                list-style: none;
-                                                border-radius: 3px;
-                                            }
-                                            .chat-list img {
-                                                width: 45px;
-                                                border-radius: 50%;
-                                                float: left;
-                                            }
-                                            .chat-list .about {
-                                                float: left;
-                                                padding-left: 8px;
-                                            }
-                                            .chat-list li .name {
-                                                font-size: 15px;
-                                            }
-                                            .chat-list .status {
-                                                color: #999;
-                                                font-size: 13px;
-                                            }
-                                            .clearfix:after {
-                                                visibility: hidden;
-                                                display: block;
-                                                font-size: 0;
-                                                content: " ";
-                                                clear: both;
-                                                height: 0;
-                                            }
-                                        </style>
                                     </div>
                                 @endforeach
                             </div>
@@ -351,4 +308,3 @@
         }
     </script>
 @endsection
-

@@ -33,7 +33,41 @@
         });
 
         let oldVal = 0;
+        let temp = null;
+        let item = null;
     </script>
+    <style>
+        .answer-list li {
+            /* padding: 10px 15px; */
+            list-style: none;
+            border-radius: 3px;
+            line-height: 0;
+        }
+        .answer-list img {
+            width: 45px;
+            border-radius: 50%;
+            /* float: left; */
+        }
+        .answer-list .about {
+            float: left;
+            padding-left: 8px;
+        }
+        .answer-list li .name {
+            color: #999;
+            font-size: 13px;
+        }
+        .answer-list .answer {
+            font-size: 15px;
+        }
+        .clearfix:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+    </style>
 </head>
 
 <body>
