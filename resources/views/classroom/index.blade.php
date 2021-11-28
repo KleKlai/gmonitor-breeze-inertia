@@ -254,7 +254,7 @@
                                                                         <img src="{{ asset('asset/images/faces/face8.jpg') }}" alt="avatar">
                                                                         <div class="flex-col d-flex" style="padding-left: 0.7rem;">
                                                                             <div class="lh-base">
-                                                                                @if ($ask_question->visibility === 'anonymous')
+                                                                                @if ($answer->visibility === 'anonymous')
                                                                                     <div class="name">Anonymous Student</div>
                                                                                 @else
                                                                                     <div class="name">{{ $answer->user->name }}</div>
