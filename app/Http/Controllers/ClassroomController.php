@@ -80,11 +80,6 @@ class ClassroomController extends Controller
             'name'      => ucwords($request->name),
         ]);
 
-        $attendance = Attendance::create([
-            'user_id'       => Auth::user()->id,
-            'classroom_id'  => $classroom->id,
-        ]);
-
         //Attach User as a Teacher
         $classroom->users()->attach(auth()->user(), ['is_teacher' => true]);
 
@@ -106,7 +101,7 @@ class ClassroomController extends Controller
         }
 
         $students = $classroom->students;
-        $questions = $classroom->questions;
+        $questions = $classroom->questions->sortByDesc('id')->take(5);
 
         return view('classroom.index', compact('classroom', 'students', 'questions'));
     }

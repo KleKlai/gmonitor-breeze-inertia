@@ -16,7 +16,8 @@ Route::get('/archive/classroom', [ClassroomController::class, 'archiveClassroomI
 Route::get('/archive/classroom/{classroom}', [ClassroomController::class, 'archiveClassroom'])->name('archive-classroom');
 Route::get('/archive/classroom/{classroom}/unarchive', [ClassroomController::class, 'unarchiveClassroom'])->name('unarchive-classroom');
 Route::get('/classroom/remove-student/{classroom}/{user}', [ClassroomController::class, 'removeStudent'])->name('unenroll.student');
-Route::get('/open-attendance/{classroom}', [AttendanceController::class, 'attendance'])->name('open.attendance');
+Route::get('/open-attendance/{classroom}', [AttendanceController::class, 'openAttendance'])->name('open.attendance');
+Route::get('/close-attendance/{classroom}', [AttendanceController::class, 'closeAttendance'])->name('close.attendance');
 Route::post('/question/ask/{classroom}', [QuestionController::class, 'store'])->name('ask.question');
 
 Route::get('/test', function() {
