@@ -38,6 +38,8 @@ class AnswerController extends BaseController
             'visibility'    => $request->visibility,
         ]);
 
+        $model->user = $model->user;
+
         broadcast(new StudentAnswer($model))->toOthers();
 
         // return response()->json([

@@ -196,7 +196,14 @@
                                                 temp += '<img src="/asset/images/faces/face8.jpg" alt="avatar">';
                                                 temp += '<div class="flex-col d-flex" style="padding-left: 0.7rem;">';
                                                 temp += '<div class="lh-base">';
-                                                temp += '<div class="name">' + data.answer.user_id + '</div>';
+
+                                                if (data.answer.visibility === 'anonymous') {
+                                                    temp += '<div class="name">Anonymous Student</div>';
+                                                }
+                                                else {
+                                                    temp += '<div class="name">' + data.answer.user.name + '</div>';
+                                                }
+
                                                 temp += '<div class="answer">' + data.answer.answer + '</div>';
                                                 temp += '</div>';
                                                 temp += '</div>';

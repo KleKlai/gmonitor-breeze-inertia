@@ -13,7 +13,7 @@ class Answer extends Model
         'user_id', 'classroom_id', 'question_id', 'answer', 'visibility'
     ];
 
-    public function questions()
+    public function question()
     {
         return $this->belongsTo(Questions::class);
     }
