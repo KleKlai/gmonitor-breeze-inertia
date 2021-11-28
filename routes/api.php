@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/search', [SearchController::class, 'searchClassroom']);
     Route::get('/classroom-list', [ClassroomController::class, 'index']);
     Route::post('/attendance', [AttendanceController::class, 'recordAttendance']);
+    Route::post('/attendance-validate', [AttendanceController::class, 'validateAttendance']);
     Route::post('/answer', [AnswerController::class, 'index']); //Receive answer from question ask by teacher
     Route::get('/answer/{question_id}', [AnswerController::class, 'get_answers']);
     Route::post('/ask', [AskController::class, 'index']); //Receive question from the student

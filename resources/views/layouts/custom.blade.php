@@ -77,7 +77,7 @@
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:../../partials/_settings-panel.html -->
-      @include('layouts.sub-layout.theme-wrapper')
+      {{--  @include('layouts.sub-layout.theme-wrapper')  --}}
       <!-- partial:../../partials/_sidebar.html -->
       @include('layouts.sub-layout.left-nav-link')
       <!-- partial -->
@@ -116,7 +116,11 @@
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->
 
+<<<<<<< HEAD
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
+=======
+    {{--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>  --}}
+>>>>>>> 13a00eb38b1c4d1e273243cace9d2497a7a9fa5d
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 

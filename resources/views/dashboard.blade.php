@@ -5,6 +5,10 @@
         <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('success') }}</p>
     @endif
 
+    @if(Session::has('error'))
+        <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('error') }}</p>
+    @endif
+
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
         <div class="card-body">
@@ -38,7 +42,7 @@
                                 @if($classroom->is_open == false)
                                     <a href="{{ route('open.attendance', $classroom)}}" class="btn btn-primary btn-rounded btn-fw">Open Attendance</a>
                                 @else
-                                    <a href="{{ route('open.attendance', $classroom)}}" class="btn btn-danger btn-rounded btn-fw">Close Attendance</a>
+                                    <a href="{{ route('close.attendance', $classroom)}}" class="btn btn-danger btn-rounded btn-fw">Close Attendance</a>
                                 @endif
                                 <a href="{{ route('classroom.show', $classroom->id) }}" class="btn btn-link">Visit</a>
                             </td>

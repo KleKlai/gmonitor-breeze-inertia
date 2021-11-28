@@ -331,7 +331,7 @@
                                             <h3 class="mb-0 text-white upgrade-info">
                                                 Share your <span class="fw-bold">Code</span> for better outreach
                                             </h3>
-                                            <button value="{{ $classroom->code }}" id="classcode" onclick="copyToClipboard('{{ $classroom->code }}')" class="btn btn-info upgrade-btn">{{ $classroom->code }}</a>
+                                            <div value="{{ $classroom->code }}" id="classcode" onclick="copyToClipboard('{{ $classroom->code }}')" class="btn btn-info upgrade-btn">{{ $classroom->code }}</div>
                                             </div>
                                         </div>
                                         </div>

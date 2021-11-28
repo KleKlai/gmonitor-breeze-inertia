@@ -84,18 +84,41 @@ class AttendanceController extends Controller
         //
     }
 
-    public function attendance(Classroom $classroom)
+    public function openAttendance(Classroom $classroom)
     {
+        //Update classroom so it can reflect on UI
         $classroom->update([
             'is_open'   => ($classroom->is_open == false) ? true : false,
         ]);
 
-        if($classroom->is_open == true){
-            \Session::flash('success', 'Attendance has been open');
+        //Create Attendance
+        Attendance::create([
+            'user_id'       => \Auth::user()->id,
+            'classroom_id'  => $classroom->id,
+            'is_open'       => true,
+        ]);
 
-        } else {
-            \Session::flash('success', 'Attendance has been close');
-        }
+        \Session::flash('success', 'Attendance has been open');
+
+        return redirect()->back();
+    }
+
+    public function closeAttendance(Classroom $classroom)
+    {
+        // Find Attendance for the current classroom and look for who is status is_open is true
+        $attendance = Attendance::where('classroom_id', $classroom->id)->where('is_open', true)->first();
+
+        //Update classroom status so it can reflect on UI
+        $classroom->update([
+            'is_open' => false,
+        ]);
+
+        //Update attendance table set it to true
+        $attendance->update([
+            'is_open' => false,
+        ]);
+
+        \Session::flash('error', 'Attendance has been close');
 
         return redirect()->back();
     }
