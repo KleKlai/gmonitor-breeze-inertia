@@ -55,13 +55,13 @@ class AttendanceController extends Controller
         $attendance = Attendance::where('classroom_id', $classroom->id)->where('is_open', true)->first();
 
         //validate if the user already has attendance
-        if($attendance->users->contains(Auth()->user()))
+        if($attendance->users->contains(Auth::user()))
         {
             //If user has already attendance
             return response()->json([
                 "Status"        => "OK",
                 "Attendance"    => true,
-                "User"          => Auth()->user(),
+                "User"          => Auth::user(),
             ]);
         }
 
@@ -77,10 +77,10 @@ class AttendanceController extends Controller
         if($attendance->created_at->addMinute(15)->lte(Carbon::now()))
         {
             //Attach the current login user to the attendance with parameters "Status" and "is_student"
-            $attendance->users()->attach(auth()->user(), ['status' => 'Tardies']);
+            $attendance->users()->attach(Auth::user(), ['status' => 'Tardies']);
         } else {
             //Attach the current login user to the attendance with parameters "Status" and "is_student"
-            $attendance->users()->attach(auth()->user(), ['status' => 'Present']);
+            $attendance->users()->attach(Auth::user(), ['status' => 'Present']);
         }
 
         return response()->json([
@@ -134,19 +134,19 @@ class AttendanceController extends Controller
         $attendance = Attendance::where('classroom_id', $classroom->id)->where('is_open', true)->first();
 
         //validate if the user already has attendance
-        if($attendance->users->contains(Auth()->user()))
+        if($attendance->users->contains(Auth::user()))
         {
             return response()->json([
                 "Status"        => "OK",
                 "Attendance"    => true,
-                "User"          => Auth()->user(),
+                "User"          => Auth::user(),
             ]);
         }
 
         return response()->json([
             "Status"        => "OK",
             "Attendance"    => false,
-            "User"          => Auth()->user(),
+            "User"          => Auth::user(),
         ]);
     }
 }

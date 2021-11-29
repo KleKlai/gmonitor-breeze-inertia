@@ -44,7 +44,6 @@
                                 <thead>
                                 <tr>
                                     <th> Name </th>
-                                    <th> Gender </th>
                                     <th> Attendance</th>
                                     <th> Action </th>
                                 </tr>
@@ -53,8 +52,7 @@
                                     @forelse ($students as $student)
                                         <tr>
                                             <td>{{ $student->name }}</td>
-                                            <td>Male</td>
-                                            <td>36</td>
+                                            <td>36/40</td>
                                             <td>
                                                 <a href="{{ route('unenroll.student', [$classroom, $student]) }}" class="btn btn-outline-secondary btn-rounded btn-icon">
                                                     <i class="icon-ban text-success"></i>
