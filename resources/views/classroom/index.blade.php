@@ -108,118 +108,211 @@
                 <div class="tab-pane fade show" id="live-answers" role="tabpanel" aria-labelledby="live-answers">
                     <div class="row">
                         <div class="col-sm-12">
-                        <div class="statistics-details d-flex align-items-center justify-content-between">
-                            <div class="accordion w-100" id="accordionQuestions">
-                                @foreach ($questions as $question)
-                                    <div class="my-2 accordion-item">
-                                        <h2 class="accordion-header" id="heading-{{ $question['id'] }}">
-                                            <button
-                                                class="accordion-button"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#collapse-{{ $question['id'] }}"
-                                                aria-expanded="false"
-                                                aria-controls="collapse-{{ $question['id'] }}"
-                                            >
-                                                <table class="w-100">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="text-blue-600" style="font-size: 0.8rem;">
-                                                                    <div class="position-relative">
-                                                                        Question
-                                                                        <span class="top-0 position-absolute translate-middle badge rounded-pill bg-primary">
-                                                                            <span class="answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}">0</span>
-                                                                            <span class="visually-hidden">unread messages</span>
-                                                                        </span>
+                            <div class="accordion w-100" id="accordionQuestionsFromStudents">
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header" id="headingQuestionsFromStudents">
+                                    <button
+                                        class="accordion-button"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseQuestionsFromStudents"
+                                        aria-expanded="false"
+                                        aria-controls="collapseQuestionsFromStudents"
+                                    >
+                                        <div class="text-blue-600" style="font-size: 0.8rem;">
+                                            <div class="position-relative">
+                                                Student ask question
+                                                <span class="top-0 position-absolute translate-middle badge rounded-pill bg-primary">
+                                                    <span class="students-ask">0</span>
+                                                    <span class="visually-hidden">unread messages</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </button>
+                                  </h2>
+                                  <div id="collapseQuestionsFromStudents" class="accordion-collapse collapse" aria-labelledby="headingQuestionsFromStudents" data-bs-parent="#accordionQuestionsFromStudents">
+                                    <div class="accordion-body bg-light">
+                                        <ul class="px-4 mt-2 mb-0 border list-unstyled ask-list border-1 border-primary bg-primary" style="border-radius: 0.5rem;">
+                                            @foreach ($ask_questions as $ask_question)
+                                                <li class="my-4 bg-transparent">
+                                                    <div class="d-inline-block">
+                                                        <div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">
+                                                            <img src="{{ asset('asset/images/faces/face8.jpg') }}" alt="avatar">
+                                                            <div class="flex-col d-flex" style="padding-left: 0.7rem;">
+                                                                <div class="lh-base">
+                                                                    @if ($ask_question->visibility === 'anonymous')
+                                                                        <div class="name">Anonymous Student</div>
+                                                                    @else
+                                                                        <div class="name">{{ $ask_question->user->name }}</div>
+                                                                    @endif
+                                                                    <div class="question">{{ $ask_question->question }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <script>
+                                // pusher
+                                let student_ask = document.querySelector(".students-ask");
+                                let channel_ask = pusher.subscribe("ask.{{ $ask_questions->first() ? $ask_questions->first()->classroom_id : 0 }}");
+                                let ask_list = document.querySelector(".ask-list");
+
+                                student_ask.textContent = {{ $ask_questions->count() }};
+
+                                channel_ask.bind('ask.new', function(data) {
+                                    console.log('new ask: ', data);
+
+                                    oldVal = student_ask.textContent;
+
+                                    student_ask.textContent = parseInt(oldVal) + 1;
+
+                                    temp = '<div class="d-inline-block">';
+                                    temp += '<div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">';
+                                    temp += '<img src="/asset/images/faces/face8.jpg" alt="avatar">';
+                                    temp += '<div class="flex-col d-flex" style="padding-left: 0.7rem;">';
+                                    temp += '<div class="lh-base">';
+
+                                    if (data.question.visibility === 'anonymous') {
+                                        temp += '<div class="name">Anonymous Student</div>';
+                                    }
+                                    else {
+                                        temp += '<div class="name">' + data.question.user.name + '</div>';
+                                    }
+
+                                    temp += '<div class="answer">' + data.question.question + '</div>';
+                                    temp += '</div>';
+                                    temp += '</div>';
+                                    temp += '</div>';
+                                    temp += '</div>';
+
+                                    item = document.createElement('li');
+                                    item.className = 'my-4 bg-transparent';
+                                    item.innerHTML = temp;
+                                    ask_list.appendChild(item);
+                                });
+                                // pusher
+                            </script>
+                            <div class="statistics-details d-flex align-items-center justify-content-between">
+                                <div class="accordion w-100" id="accordionQuestions">
+                                    @foreach ($questions as $question)
+                                        <div class="my-2 accordion-item">
+                                            <h2 class="accordion-header" id="heading-{{ $question['id'] }}">
+                                                <button
+                                                    class="accordion-button"
+                                                    type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse-{{ $question['id'] }}"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapse-{{ $question['id'] }}"
+                                                >
+                                                    <table class="w-100">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="text-blue-600" style="font-size: 0.8rem;">
+                                                                        <div class="position-relative">
+                                                                            Question
+                                                                            <span class="top-0 position-absolute translate-middle badge rounded-pill bg-primary">
+                                                                                <span class="answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}">0</span>
+                                                                                <span class="visually-hidden">unread messages</span>
+                                                                            </span>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="pt-2 text-black w-100">
-                                                                    {{ $question['question'] }}
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </button>
-                                        </h2>
-                                        <div
-                                            id="collapse-{{ $question['id'] }}"
-                                            class="accordion-collapse collapse"
-                                            aria-labelledby="heading-{{ $question['id'] }}"
-                                            data-bs-parent="#accordionQuestions"
-                                        >
-                                            <div class="accordion-body bg-light">
-                                                <ul class="px-4 mt-2 mb-0 border list-unstyled answer-list answer-list-c{{ $question['classroom_id'] }}q{{ $question['id'] }} border-1 border-primary bg-primary" style="border-radius: 0.5rem;">
-                                                    @foreach ($question->answers as $answer)
-                                                        <li class="my-4 bg-transparent">
-                                                            <div class="d-inline-block">
-                                                                <div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">
-                                                                    <img src="{{ asset('asset/images/faces/face8.jpg') }}" alt="avatar">
-                                                                    <div class="flex-col d-flex" style="padding-left: 0.7rem;">
-                                                                        <div class="lh-base">
-                                                                            <div class="name">{{ $answer->user->name }}</div>
-                                                                            <div class="answer">{{ $answer->answer }}</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="pt-2 text-black w-100">
+                                                                        {{ $question['question'] }}
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </button>
+                                            </h2>
+                                            <div
+                                                id="collapse-{{ $question['id'] }}"
+                                                class="accordion-collapse collapse"
+                                                aria-labelledby="heading-{{ $question['id'] }}"
+                                                data-bs-parent="#accordionQuestions"
+                                            >
+                                                <div class="accordion-body bg-light">
+                                                    <ul class="px-4 mt-2 mb-0 border list-unstyled answer-list answer-list-c{{ $question['classroom_id'] }}q{{ $question['id'] }} border-1 border-primary bg-primary" style="border-radius: 0.5rem;">
+                                                        @foreach ($question->answers as $answer)
+                                                            <li class="my-4 bg-transparent">
+                                                                <div class="d-inline-block">
+                                                                    <div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">
+                                                                        <img src="{{ asset('asset/images/faces/face8.jpg') }}" alt="avatar">
+                                                                        <div class="flex-col d-flex" style="padding-left: 0.7rem;">
+                                                                            <div class="lh-base">
+                                                                                @if ($answer->visibility === 'anonymous')
+                                                                                    <div class="name">Anonymous Student</div>
+                                                                                @else
+                                                                                    <div class="name">{{ $answer->user->name }}</div>
+                                                                                @endif
+                                                                                <div class="answer">{{ $answer->answer }}</div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             </div>
+
+                                            <script>
+                                                // pusher
+                                                let channel_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = pusher.subscribe("answer.c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
+                                                let answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = document.querySelector(".answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
+                                                let answer_list_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = document.querySelector(".answer-list-c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
+
+                                                answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent = {{ $question->answers->count() }};
+
+                                                channel_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.bind('answer.new', function(data) {
+                                                    console.log('new answer: ', data);
+
+                                                    oldVal = answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent;
+
+                                                    answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent = parseInt(oldVal) + 1;
+
+                                                    temp = '<div class="d-inline-block">';
+                                                    temp += '<div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">';
+                                                    temp += '<img src="/asset/images/faces/face8.jpg" alt="avatar">';
+                                                    temp += '<div class="flex-col d-flex" style="padding-left: 0.7rem;">';
+                                                    temp += '<div class="lh-base">';
+
+                                                    if (data.answer.visibility === 'anonymous') {
+                                                        temp += '<div class="name">Anonymous Student</div>';
+                                                    }
+                                                    else {
+                                                        temp += '<div class="name">' + data.answer.user.name + '</div>';
+                                                    }
+
+                                                    temp += '<div class="answer">' + data.answer.answer + '</div>';
+                                                    temp += '</div>';
+                                                    temp += '</div>';
+                                                    temp += '</div>';
+                                                    temp += '</div>';
+
+                                                    item = document.createElement('li');
+                                                    item.className = 'my-4 bg-transparent';
+                                                    item.innerHTML = temp;
+                                                    answer_list_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.appendChild(item);
+                                                });
+                                                // pusher
+                                            </script>
                                         </div>
-
-                                        <script>
-                                            // pusher
-                                            let channel_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = pusher.subscribe("answer.c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
-                                            let answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = document.querySelector(".answered-c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
-                                            let answer_list_c{{ $question['classroom_id'] }}q{{ $question['id'] }} = document.querySelector(".answer-list-c{{ $question['classroom_id'] }}q{{ $question['id'] }}");
-
-                                            answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent = {{ $question->answers->count() }};
-
-                                            channel_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.bind('answer.new', function(data) {
-                                                console.log('new answer: ', data);
-
-                                                oldVal = answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent;
-
-                                                answered_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.textContent = parseInt(oldVal) + 1;
-
-                                                temp = '<div class="d-inline-block">';
-                                                temp += '<div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">';
-                                                temp += '<img src="/asset/images/faces/face8.jpg" alt="avatar">';
-                                                temp += '<div class="flex-col d-flex" style="padding-left: 0.7rem;">';
-                                                temp += '<div class="lh-base">';
-
-                                                if (data.answer.visibility === 'anonymous') {
-                                                    temp += '<div class="name">Anonymous Student</div>';
-                                                }
-                                                else {
-                                                    temp += '<div class="name">' + data.answer.user.name + '</div>';
-                                                }
-
-                                                temp += '<div class="answer">' + data.answer.answer + '</div>';
-                                                temp += '</div>';
-                                                temp += '</div>';
-                                                temp += '</div>';
-                                                temp += '</div>';
-
-                                                item = document.createElement('li');
-                                                item.className = 'my-4 bg-transparent';
-                                                item.innerHTML = temp;
-                                                answer_list_c{{ $question['classroom_id'] }}q{{ $question['id'] }}.appendChild(item);
-                                            });
-                                            // pusher
-                                        </script>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
-
-                        </div>
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classroom;
 use App\Models\Attendance;
+use App\Models\Question;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Traits\HasRoles;
@@ -101,9 +102,14 @@ class ClassroomController extends Controller
         }
 
         $students = $classroom->students;
-        $questions = $classroom->questions->sortByDesc('id')->take(5);
 
-        return view('classroom.index', compact('classroom', 'students', 'questions'));
+        // $questions = $classroom->questions;
+        $questions = Question::where('answer_by', '<>', null)->where('classroom_id', $classroom->id)->get()->sortByDesc('id')->take(5);
+        $ask_questions = Question::where('answer_by', null)->where('classroom_id', $classroom->id)->get();
+
+        // $questions = $classroom->questions->sortByDesc('id')->take(5);
+
+        return view('classroom.index', compact('classroom', 'students', 'questions', 'ask_questions'));
     }
 
     /**
