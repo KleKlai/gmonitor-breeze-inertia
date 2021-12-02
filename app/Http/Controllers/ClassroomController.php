@@ -103,7 +103,7 @@ class ClassroomController extends Controller
 
         $students = $classroom->students;
         // $attendances = $classroom->attendance->users();
-        $attendances = Attendance::where('classroom_id', $classroom->id)->get();
+        $attendances = Attendance::with('users')->where('classroom_id', $classroom->id)->get();
 
         // dd(Classroom::findOrFail($classroom->id)->AttendanceUser(2));
         // $attendance_user = 0;

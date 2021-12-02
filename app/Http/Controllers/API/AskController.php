@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Models\Question;
+use App\Models\Answer;
 use App\Events\AskQuestion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
