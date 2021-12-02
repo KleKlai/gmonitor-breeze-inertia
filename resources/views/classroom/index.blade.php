@@ -61,8 +61,8 @@
                                     @forelse ($students as $student)
                                         <tr>
                                             <td>{{ $student->id }} {{ $student->name }}</td>
-                                            {{--  @foreach ($attendances as $attendance)
-                                                <td>{{ $attendance->users->count() }}/{{ $attendances->count() }}</td>
+                                            {{--  @foreach ($attendances->user as $user)
+                                                <td>{{ 2 }}</td>
                                             @endforeach  --}}
                                             <td>{{ $attendances->user }}/</td>
                                             <td>

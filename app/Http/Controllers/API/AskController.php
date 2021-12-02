@@ -4,11 +4,14 @@ namespace App\Http\Controllers\api;
 
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Classroom;
 use App\Events\AskQuestion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+// use Auth;
 
 class AskController extends BaseController
 {
@@ -48,13 +51,33 @@ class AskController extends BaseController
 
     public function latestQuestion(Request $request)
     {
-        // Fetch Last Question and check if the user already answered
-        // $request->code
-        // $request->user_id
+        $validator = Validator::make($request->all(), array(
+            'code'     => 'required|string',
+        ));
 
-        $question = Question::where('classroom_id', $request->code)->latest('id')->first();
+        if($validator->fails()) {
+            return response()->json(['Message' => $validator->errors()]);
+        }
 
-        $question   = Question::whereClassroomId($question)->latest('id')->first();
+        //Find the classroom
+        $classroom = Classroom::firstWhere('code', $request->code);
+
+        //Catch the error here if the classroom doesn't exist
+        if($classroom == null){
+            return response()->json([
+                "Status"    => "OK",
+                "Message"   => "Classroom doesn't exist",
+            ]);
+        }
+
+        $question   = Question::whereClassroomId($classroom->id)->latest('id')->first();
+
+        if($question == null){
+            return response()->json([
+                "Status"    => "OK",
+                "Message"   => "Classroom doesn't have any question yet.",
+            ]);
+        }
 
         $answer     = Answer::whereQuestionId($question->id)->whereUserId(Auth::user()->id)->first();
 
