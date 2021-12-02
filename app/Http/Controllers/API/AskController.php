@@ -55,7 +55,7 @@ class AskController extends BaseController
 
         $question   = Question::whereClassroomId(4)->latest('id')->first();
 
-        $answer     = Answer::whereQuestionId($question->id)->whereUserId(22)->first();
+        $answer     = Answer::whereQuestionId($question->id)->whereUserId(Auth::user()->id)->first();
 
         // If the answer eloquent empty which means the user is not yet answer.
         // return the user has not yet answer
