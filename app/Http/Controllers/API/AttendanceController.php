@@ -77,7 +77,7 @@ class AttendanceController extends Controller
         if($attendance->created_at->addMinute(15)->lte(Carbon::now()))
         {
             //Attach the current login user to the attendance with parameters "Status" and "is_student"
-            $attendance->users()->attach(Auth::user(), ['status' => 'Tardies']);
+            $attendance->users()->attach(Auth::user(), ['status' => 'Late']);
         } else {
             //Attach the current login user to the attendance with parameters "Status" and "is_student"
             $attendance->users()->attach(Auth::user(), ['status' => 'Present']);

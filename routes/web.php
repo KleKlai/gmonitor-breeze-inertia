@@ -6,6 +6,9 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\QuestionController;
 
+use App\Models\Question;
+use App\Models\Answer;
+
 Route::redirect('/', 'login');
 
 Route::get('/dashboard', [ClassroomController::class, 'index'])->name('dashboard');
@@ -22,6 +25,20 @@ Route::post('/question/ask/{classroom}', [QuestionController::class, 'store'])->
 
 Route::get('/test', function() {
     return view('notification');
+});
+
+Route::get('/quest', function() {
+
+    $question   = Question::whereClassroomId(4)->latest('id')->first();
+
+    $answer     = Answer::whereQuestionId($question->id)->whereUserId(22)->first();
+
+    if(empty($answer))
+    {
+        return "empty";
+    }
+
+    return 'data';
 });
 
 require __DIR__.'/auth.php';

@@ -26,7 +26,7 @@
                 @endif
 
                 <h4>Register Account</h4>
-                <h6 class="fw-light mb-4">Lorem Ipsum Lorem Ipsum Lorem Ipsum</h6>
+                {{--  <h6 class="fw-light mb-4">Lorem Ipsum Lorem Ipsum Lorem Ipsum</h6>  --}}
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="form-group row">

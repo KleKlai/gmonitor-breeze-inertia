@@ -7,6 +7,7 @@ use App\Events\AskQuestion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\BaseController;
+use Illuminate\Support\Facades\Auth;
 
 class AskController extends BaseController
 {
@@ -42,5 +43,31 @@ class AskController extends BaseController
             ['ask' => $model],
             'Ask question successful'
         );
+    }
+
+    public function latestQuestion(Request $request)
+    {
+        // Fetch Last Question and check if the user already answered
+        // $request->code
+        // $request->user_id
+
+        $question = Question::where('classroom_id', $request->code)->latest('id')->first();
+
+        $question   = Question::whereClassroomId(4)->latest('id')->first();
+
+        $answer     = Answer::whereQuestionId($question->id)->whereUserId(22)->first();
+
+        // If the answer eloquent empty which means the user is not yet answer.
+        // return the user has not yet answer
+        if(empty($answer))
+        {
+            return response()->json([
+                "is_answer" => false,
+            ]);
+        }
+
+        return response()->json([
+            "is_answer" => true,
+        ]);
     }
 }

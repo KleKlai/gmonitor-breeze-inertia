@@ -24,4 +24,5 @@ class Attendance extends Model
             ->withTimestamps()
             ->withPivot(['status']);
     }
+
 }

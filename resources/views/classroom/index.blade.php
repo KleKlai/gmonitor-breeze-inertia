@@ -3,6 +3,15 @@
 @section('page_title', $classroom->name)
 
 @section('body')
+
+@if(Session::has('success'))
+        <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('success') }}</p>
+@endif
+
+@if(Session::has('error'))
+    <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('error') }}</p>
+@endif
+
 <div class="row">
     <div class="col-sm-12">
         <div class="home-tab">
@@ -51,8 +60,8 @@
                                 <tbody>
                                     @forelse ($students as $student)
                                         <tr>
-                                            <td>{{ $student->name }}</td>
-                                            <td>36/40</td>
+                                            <td>{{ $student->id }} {{ $student->name }}</td>
+                                            <td>6/{{ $attendances->count() }}</td>
                                             <td>
                                                 <a href="{{ route('unenroll.student', [$classroom, $student]) }}" class="btn btn-outline-secondary btn-rounded btn-icon">
                                                     <i class="icon-ban text-success"></i>
@@ -88,7 +97,7 @@
 
                                         <div class="form-group">
                                             <label for="Name">Question</label>
-                                            <input type="text" class="form-control" name="question" placeholder="Question" required>
+                                            <input type="text" class="form-control" name="question" placeholder="Write your question here." required>
                                         </div>
                                         <div class="form-group">
                                             <label>Answer By</label>
@@ -137,11 +146,11 @@
                                                 <li class="my-4 bg-transparent">
                                                     <div class="d-inline-block">
                                                         <div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">
-                                                            <img src="{{ asset('asset/images/faces/face8.jpg') }}" alt="avatar">
+                                                            {{--  <img src="{{ asset('asset/images/faces/face8.jpg') }}" alt="avatar">  --}}
                                                             <div class="flex-col d-flex" style="padding-left: 0.7rem;">
                                                                 <div class="lh-base">
                                                                     @if ($ask_question->visibility === 'anonymous')
-                                                                        <div class="name">Anonymous Student</div>
+                                                                        <div class="name">Anonymous</div>
                                                                     @else
                                                                         <div class="name">{{ $ask_question->user->name }}</div>
                                                                     @endif

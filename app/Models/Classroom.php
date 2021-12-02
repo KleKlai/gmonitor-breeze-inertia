@@ -22,7 +22,7 @@ class Classroom extends Model
 
         // auto-sets values on creation
         static::creating(function ($query) {
-            $query->code   = Str::random(6);
+            $query->code   = strtoupper(Str::random(6));
         });
     }
 

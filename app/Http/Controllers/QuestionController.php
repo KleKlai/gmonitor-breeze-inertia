@@ -38,6 +38,11 @@ class QuestionController extends Controller
      */
     public function store(Classroom $classroom, Request $request)
     {
+        if($classroom->is_open != true)
+        {
+            \Session::flash('error', 'Attendance is close.');
+            return redirect()->back();
+        }
 
         $request->validate([
             'question'      => 'required',

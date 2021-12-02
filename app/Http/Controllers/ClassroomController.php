@@ -102,6 +102,17 @@ class ClassroomController extends Controller
         }
 
         $students = $classroom->students;
+        // $attendances = $classroom->attendance->users();
+        $attendances = Attendance::where('classroom_id', $classroom->id)->get();
+
+        // dd(Classroom::findOrFail($classroom->id)->AttendanceUser(2));
+        // $attendance_user = 0;
+
+        // foreach($attendances as $attendance)
+        // {
+
+        // }
+        // dd($attendances->users->toArray());
 
         // $questions = $classroom->questions;
         $questions = Question::where('answer_by', '<>', null)->where('classroom_id', $classroom->id)->get()->sortByDesc('id')->take(5);
@@ -109,7 +120,7 @@ class ClassroomController extends Controller
 
         // $questions = $classroom->questions->sortByDesc('id')->take(5);
 
-        return view('classroom.index', compact('classroom', 'students', 'questions', 'ask_questions'));
+        return view('classroom.index', compact('classroom', 'students', 'questions', 'ask_questions', 'attendances'));
     }
 
     /**
