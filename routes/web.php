@@ -27,18 +27,4 @@ Route::get('/test', function() {
     return view('notification');
 });
 
-Route::get('/quest', function() {
-
-    $question   = Question::whereClassroomId(4)->latest('id')->first();
-
-    $answer     = Answer::whereQuestionId($question->id)->whereUserId(22)->first();
-
-    if(empty($answer))
-    {
-        return "empty";
-    }
-
-    return 'data';
-});
-
 require __DIR__.'/auth.php';
