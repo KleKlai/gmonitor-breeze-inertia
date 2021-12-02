@@ -53,7 +53,7 @@ class AskController extends BaseController
 
         $question = Question::where('classroom_id', $request->code)->latest('id')->first();
 
-        $question   = Question::whereClassroomId(4)->latest('id')->first();
+        $question   = Question::whereClassroomId($question)->latest('id')->first();
 
         $answer     = Answer::whereQuestionId($question->id)->whereUserId(Auth::user()->id)->first();
 
