@@ -61,10 +61,8 @@
                                     @forelse ($students as $student)
                                         <tr>
                                             <td>{{ $student->id }} {{ $student->name }}</td>
-                                            {{--  @foreach ($attendances->user as $user)
-                                                <td>{{ 2 }}</td>
-                                            @endforeach  --}}
-                                            <td>{{ $attendances->user }}/</td>
+                                            <td>{{ $student }}</td>
+                                            {{--  <td>{{ $attendances }}/</td>  --}}
                                             <td>
                                                 <a href="{{ route('unenroll.student', [$classroom, $student]) }}" class="btn btn-outline-secondary btn-rounded btn-icon">
                                                     <i class="icon-ban text-success"></i>

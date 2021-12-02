@@ -23,8 +23,6 @@ Route::get('/open-attendance/{classroom}', [AttendanceController::class, 'openAt
 Route::get('/close-attendance/{classroom}', [AttendanceController::class, 'closeAttendance'])->name('close.attendance');
 Route::post('/question/ask/{classroom}', [QuestionController::class, 'store'])->name('ask.question');
 
-Route::get('/test', function() {
-    return view('notification');
-});
+Route::get('/test',[ClassroomController::class, 'test']);
 
 require __DIR__.'/auth.php';

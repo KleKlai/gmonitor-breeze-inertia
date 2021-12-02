@@ -102,25 +102,24 @@ class ClassroomController extends Controller
         }
 
         $students = $classroom->students;
-        // $attendances = $classroom->attendance->users();
-        $attendances = Attendance::with('users')->where('classroom_id', $classroom->id)->get();
-        // dd($attendances);
-        // dd(Classroom::findOrFail($classroom->id)->AttendanceUser(2));
-        // $attendance_user = 0;
 
-        // foreach($attendances as $attendance)
-        // {
+        $attendance_record = Attendance::with('users')->where('classroom_id', $classroom->id)->get();
 
-        // }
-        // dd($attendances->users->toArray());
+        // dd(User::findOrFail(25)->attendances);
+        // dd($attendance_record->load('users'));
 
-        // $questions = $classroom->questions;
+        foreach($students as $student)
+        {
+            $student->push('sample_data', 'test_data');
+        }
+
+        // dd($students);
         $questions = Question::where('answer_by', '<>', null)->where('classroom_id', $classroom->id)->get()->sortByDesc('id')->take(5);
         $ask_questions = Question::where('answer_by', null)->where('classroom_id', $classroom->id)->get();
 
         // $questions = $classroom->questions->sortByDesc('id')->take(5);
 
-        return view('classroom.index', compact('classroom', 'students', 'questions', 'ask_questions', 'attendances'));
+        return view('classroom.index', compact('classroom', 'students', 'questions', 'ask_questions', 'attendance_record'));
     }
 
     /**
@@ -191,5 +190,15 @@ class ClassroomController extends Controller
         $classroom->update(["archive"=>false]);
 
         return redirect()->back();
+    }
+
+    public function test()
+    {
+
+        $users = User::with('attendances')->get();
+        dd($users);
+
+        $data = 'test';
+        return view('classroom.test', compact('data'));
     }
 }
