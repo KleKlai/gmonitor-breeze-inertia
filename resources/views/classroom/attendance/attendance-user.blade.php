@@ -1,30 +1,35 @@
 @extends('layouts.custom')
 
-@section('page_title', 'Attendance')
+@section('page_title', $attendance->created_at->format('F d, y - g:i a'))
 
 @section('body')
 <div class="col-md-12 col-lg-12 grid-margin stretch-card">
     <div class="card card-rounded">
         <div class="card-body card-rounded">
-        <h4 class="card-title  card-title-dash">Recent</h4>
+        <h4 class="card-title  card-title-dash">Student List</h4>
 
-        @foreach ($attendances as $attendance)
+        @forelse ($attendance->users as $user)
             <div class="list align-items-center border-bottom py-2">
                 <div class="wrapper w-100">
-                    {{--  <p class="mb-2 font-weight-medium">
-                        {{ $attendance->classroom_id }}
-                    </p>  --}}
-                    <a href="{{ route('attendance-users', $attendance->id) }}" style="text-decoration: none;">
+                    <p class="mb-2 font-weight-medium">
+                        {{ $user->name }}
+                    </p>
+                    <a href="#" style="text-decoration: none;">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center">
                             <i class="mdi mdi-calendar text-muted me-1"></i>
-                            <p class="mb-0 text-small text-muted">{{ $attendance->created_at->format('F d, y - g:i a') }}</p>
+                            <p class="mb-0 text-small text-muted">{{ $user->pivot->status }} - {{ $user->created_at->format('g:i a') }}</p>
                             </div>
                         </div>
                     </a>
                 </div>
             </div>
-        @endforeach
+
+        @empty
+            <p class="mb-2 font-weight-medium">
+                No Data
+            </p>
+        @endforelse
         </div>
     </div>
 </div>

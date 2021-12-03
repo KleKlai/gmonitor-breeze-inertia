@@ -30,6 +30,9 @@
                     <a class="nav-link" id="share-access-tab" data-bs-toggle="tab" href="#share-access" role="tab" aria-selected="false">Share Access</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('attendance-classroom', $classroom) }}" role="tab" aria-selected="true">Attendance</a>
+                </li>
+                <li class="nav-item">
                     <a class="border-0 nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab" aria-selected="false">Settings</a>
                 </li>
                 </ul>

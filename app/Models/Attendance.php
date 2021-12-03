@@ -25,4 +25,11 @@ class Attendance extends Model
             ->withPivot(['status']);
     }
 
+    public function students()
+    {
+        return $this->belongsToMany(User::class)
+            ->withTimestamps()
+            ->withPivot(['status']);
+    }
+
 }

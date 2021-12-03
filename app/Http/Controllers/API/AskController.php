@@ -87,12 +87,12 @@ class AskController extends BaseController
         {
             return response()->json([
                 "is_answer" => false,
+                "Question"  => $question,
             ]);
         }
 
         return response()->json([
             "is_answer" => true,
-            "Question"  => $question,
         ]);
     }
 }

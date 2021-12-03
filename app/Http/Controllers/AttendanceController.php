@@ -122,4 +122,16 @@ class AttendanceController extends Controller
 
         return redirect()->back();
     }
+
+    public function attendanceList(Classroom $classroom)
+    {
+        $attendances = Attendance::with('users')->whereClassroomId($classroom->id)->get();
+
+        return view('classroom.test', compact('attendances'));
+    }
+
+    public function attendanceUser(Attendance $attendance)
+    {
+        return view('classroom.attendance.attendance-user', compact('attendance'));
+    }
 }

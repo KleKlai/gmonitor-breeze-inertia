@@ -14,7 +14,7 @@
         </a>
       </div>
     </div>
-    <div class="navbar-menu-wrapper d-flex align-items-top">
+    <div class="navbar-menu-wrapper d-flex align-items-top" >
       <ul class="navbar-nav">
         <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
           {{--  <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>  --}}
@@ -22,7 +22,8 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item dropdown">
+
+        {{--  <li class="nav-item dropdown">
           <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="icon-bell"></i>
             <span class="count"></span>
@@ -61,8 +62,9 @@
               </div>
             </a>
           </div>
-        </li>
-        <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+        </li>  --}}
+
+        {{--  <li class="nav-item dropdown d-none d-lg-block user-dropdown">
           <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
             <img class="img-xs rounded-circle" src="{{ asset('asset/images/faces/face8.jpg') }}" alt="Profile image"> </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
@@ -77,7 +79,7 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-        </li>
+        </li>  --}}
       </ul>
       <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
         <span class="mdi mdi-menu"></span>

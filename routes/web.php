@@ -23,6 +23,7 @@ Route::get('/open-attendance/{classroom}', [AttendanceController::class, 'openAt
 Route::get('/close-attendance/{classroom}', [AttendanceController::class, 'closeAttendance'])->name('close.attendance');
 Route::post('/question/ask/{classroom}', [QuestionController::class, 'store'])->name('ask.question');
 
-Route::get('/test',[ClassroomController::class, 'test']);
+Route::get('/attendance-list/{classroom}',[AttendanceController::class, 'attendanceList'])->name('attendance-classroom');
+Route::get('/attendance/users/{attendance}',[AttendanceController::class, 'attendanceUser'])->name('attendance-users');
 
 require __DIR__.'/auth.php';

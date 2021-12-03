@@ -191,14 +191,4 @@ class ClassroomController extends Controller
 
         return redirect()->back();
     }
-
-    public function test()
-    {
-
-        $users = User::with('attendances')->get();
-        dd($users);
-
-        $data = 'test';
-        return view('classroom.test', compact('data'));
-    }
 }
