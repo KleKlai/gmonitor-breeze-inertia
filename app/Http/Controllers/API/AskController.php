@@ -70,7 +70,7 @@ class AskController extends BaseController
             ]);
         }
 
-        $question   = Question::whereClassroomId($classroom->id)->latest('id')->first();
+        $question   = Question::whereClassroomId($classroom->id)->where('answer_by', '!=', null)->latest('id')->first();
 
         if($question == null){
             return response()->json([
