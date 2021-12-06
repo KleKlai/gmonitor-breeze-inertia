@@ -22,13 +22,15 @@ class JoinController extends BaseController
             );
         }
 
-        $classroom = Classroom::where('code', $request->code)->first();
+        $classroom = Classroom::where('code', $request->code)->archive(false)->first();
 
         if($classroom == null){
             return $this->sendError(
                 'Classroom doesn\'t exist'
             );
         }
+
+        //Validate if classroom is on archived state
 
         if($classroom->users->contains(Auth()->user()))
         {

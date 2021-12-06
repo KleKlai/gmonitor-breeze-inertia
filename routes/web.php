@@ -26,4 +26,6 @@ Route::post('/question/ask/{classroom}', [QuestionController::class, 'store'])->
 Route::get('/attendance-list/{classroom}',[AttendanceController::class, 'attendanceList'])->name('attendance-classroom');
 Route::get('/attendance/users/{attendance}',[AttendanceController::class, 'attendanceUser'])->name('attendance-users');
 
+Route::get('classroom-questions/all/{classroom}', [ClassroomController::class, 'showQuestion'])->name('question-all');
+
 require __DIR__.'/auth.php';

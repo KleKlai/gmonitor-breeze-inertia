@@ -74,11 +74,11 @@ class ClassroomController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'  => 'required', 'string', 'max:80'
+            'class_name'  => 'required', 'string', 'max:80'
         ]);
 
         $classroom = Classroom::create([
-            'name'      => ucwords($request->name),
+            'name'      => ucwords($request->class_name),
         ]);
 
         //Attach User as a Teacher
@@ -103,23 +103,12 @@ class ClassroomController extends Controller
 
         $students = $classroom->students;
 
-        $attendance_record = Attendance::with('users')->where('classroom_id', $classroom->id)->get();
-
-        // dd(User::findOrFail(25)->attendances);
-        // dd($attendance_record->load('users'));
-
-        foreach($students as $student)
-        {
-            $student->push('sample_data', 'test_data');
-        }
-
-        // dd($students);
         $questions = Question::where('answer_by', '<>', null)->where('classroom_id', $classroom->id)->get()->sortByDesc('id')->take(5);
         $ask_questions = Question::where('answer_by', null)->where('classroom_id', $classroom->id)->get();
 
         // $questions = $classroom->questions->sortByDesc('id')->take(5);
 
-        return view('classroom.index', compact('classroom', 'students', 'questions', 'ask_questions', 'attendance_record'));
+        return view('classroom.index', compact('classroom', 'students', 'questions', 'ask_questions'));
     }
 
     /**
@@ -169,7 +158,6 @@ class ClassroomController extends Controller
 
     public function removeStudent(Classroom $classroom, User $user)
     {
-
         //Remove the selected user to the classroom
         $classroom->users()->detach($user);
 
@@ -190,5 +178,13 @@ class ClassroomController extends Controller
         $classroom->update(["archive"=>false]);
 
         return redirect()->back();
+    }
+
+    public function showQuestion(Classroom $classroom)
+    {
+        $questions = Question::where('answer_by', '<>', null)->where('classroom_id', $classroom->id)->get()->sortByDesc('id');
+        $ask_questions = Question::where('answer_by', null)->where('classroom_id', $classroom->id)->get();
+
+        return view('classroom.questions.show', compact('questions', 'ask_questions'));
     }
 }

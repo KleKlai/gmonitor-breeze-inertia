@@ -13,12 +13,27 @@
                         </div>
                     </div>
                 </h4>
+
+                @if ($errors->any())
+                    <div>
+                        <div class="font-medium text-red-600">
+                            {{ __('Whoops! Something went wrong.') }}
+                        </div>
+
+                        <ul class="mt-3 list-disc list-inside text-sm text-red-600">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form class="forms-sample" action="{{ route('classroom.store') }}" method="POST">
                     @csrf
 
                     <div class="form-group">
                       <label for="Name">Class name</label>
-                      <input type="text" class="form-control" name="name" placeholder="Class name">
+                      <input type="text" class="form-control" name="class_name" placeholder="Class name">
                     </div>
                     {{--  <div class="form-group">
                       <label for="Name">Section</label>

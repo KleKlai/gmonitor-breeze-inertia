@@ -1,6 +1,6 @@
 @extends('layouts.custom')
 
-@section('page_title', $attendance->created_at->format('F d, y - g:i a'))
+@section('page_title', $attendance->created_at->format('F d, y - g:i A'))
 
 @section('body')
 <div class="col-md-12 col-lg-12 grid-margin stretch-card">

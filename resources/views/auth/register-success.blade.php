@@ -17,7 +17,7 @@
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
                 <h4>Congratulations</h4>
-                <h6 class="fw-light mb-4">Your account has been successfully created.</h6>
+                <h6 class="fw-light mb-4">Your account has been successfully created. You can now login on the extension directly.</h6>
 
                 </div>
             </div>

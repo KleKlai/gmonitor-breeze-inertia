@@ -56,20 +56,20 @@
                                 <thead>
                                 <tr>
                                     <th> Name </th>
-                                    <th> Attendance</th>
                                     <th> Action </th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($students as $student)
                                         <tr>
-                                            <td>{{ $student->id }} {{ $student->name }}</td>
-                                            <td>{{ $student }}</td>
-                                            {{--  <td>{{ $attendances }}/</td>  --}}
+                                            <td>{{ $student->name }}</td>
                                             <td>
-                                                <a href="{{ route('unenroll.student', [$classroom, $student]) }}" class="btn btn-outline-secondary btn-rounded btn-icon">
-                                                    <i class="icon-ban text-success"></i>
-                                                </a>
+                                                <form action="{{ route('unenroll.student', [$classroom, $student]) }}" method="get">
+                                                    @csrf
+
+                                                    <input name="_method" type="hidden" value="Unenroll">
+                                                    <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Unenroll'>Unenroll</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @empty
@@ -84,7 +84,10 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="tab-pane fade show" id="ask-question" role="tabpanel" aria-labelledby="ask-question">
+
+                    <a href="{{ route('question-all', $classroom) }}" class="btn btn-outline-primary btn-fw">All Questions</a>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
@@ -262,11 +265,11 @@
                                                             <li class="my-4 bg-transparent">
                                                                 <div class="d-inline-block">
                                                                     <div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">
-                                                                        <img src="{{ asset('asset/images/faces/face8.jpg') }}" alt="avatar">
+                                                                        {{-- <img src="{{ asset('asset/images/faces/face8.jpg') }}" alt="avatar"> --}}
                                                                         <div class="flex-col d-flex" style="padding-left: 0.7rem;">
                                                                             <div class="lh-base">
                                                                                 @if ($answer->visibility === 'anonymous')
-                                                                                    <div class="name">Anonymous Student</div>
+                                                                                    <div class="name">Anonymous</div>
                                                                                 @else
                                                                                     <div class="name">{{ $answer->user->name }}</div>
                                                                                 @endif
@@ -399,7 +402,8 @@
 
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-white btn btn-danger me-2">DELETE CLASS</button>
+                                    <input name="_method" type="hidden" value="Delete">
+                                    <button type="submit" class="text-white btn btn-danger me-2 show_confirm_delete" data-toggle="tooltip" title='Delete'>DELETE CLASS</button>
                                 </form>
                                 </div>
                             </div>
@@ -408,6 +412,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 @endsection
@@ -415,7 +420,49 @@
 @section('script')
     <script>
         function copyToClipboard(code) {
+            console.log('Test');
             navigator.clipboard.writeText(code);
         }
+    </script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script type="text/javascript">
+
+        $('.show_confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Are you sure you want to remove this record?`,
+                text: "If you remove this student, it will be gone forever in your class.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willUnenroll) => {
+                if (willUnenroll) {
+                form.submit();
+                }
+            });
+        });
+
+        $('.show_confirm_delete').click(function(event) {
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Are you sure you want to remove this record?`,
+                text: "If you delete this classroom, it will be gone forever including in your student.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                form.submit();
+                }
+            });
+        });
     </script>
 @endsection
