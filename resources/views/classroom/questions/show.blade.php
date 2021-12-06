@@ -15,7 +15,7 @@
                                         <a data-bs-toggle="collapse" href="#collapse-{{ $key }}" aria-expanded="true" aria-controls="collapse-{{ $key }}" class="fw-bold">
                                             {{ $question->question }}
                                         </a>
-                                        <p class="text-small">{{ $question->created_at->format('F d, y - g:i A') }}</p>
+                                        <p class="text-small">{{ $question->created_at->format('F d, Y - g:i A') }}</p>
                                     </h6>
                                 </div>
                                 <div id="collapse-{{ $key }}" class="collapse" role="tabpanel" aria-labelledby="heading-{{ $key }}" data-bs-parent="#accordion" style="">
