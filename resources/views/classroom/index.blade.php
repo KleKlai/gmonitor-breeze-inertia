@@ -113,7 +113,7 @@
                                                 <option value="enum">Enumeration</option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Send</button>
+                                        <button id="submit-question" type="submit" class="btn btn-primary">Send</button>
                                     </form>
                                 </div>
                             </div>
@@ -300,12 +300,11 @@
 
                                                     temp = '<div class="d-inline-block">';
                                                     temp += '<div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">';
-                                                    temp += '<img src="/asset/images/faces/face8.jpg" alt="avatar">';
                                                     temp += '<div class="flex-col d-flex" style="padding-left: 0.7rem;">';
                                                     temp += '<div class="lh-base">';
 
                                                     if (data.answer.visibility === 'anonymous') {
-                                                        temp += '<div class="name">Anonymous Student</div>';
+                                                        temp += '<div class="name">Anonymous</div>';
                                                     }
                                                     else {
                                                         temp += '<div class="name">' + data.answer.user.name + '</div>';
@@ -463,5 +462,11 @@
                 }
             });
         });
+
+        // Beta prevent duplicate submission
+        $('#submit-question').click(function() {
+            $(this).addClass('disabled');
+        });
+
     </script>
 @endsection

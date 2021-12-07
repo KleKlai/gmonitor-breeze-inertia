@@ -104,7 +104,7 @@ class ClassroomController extends Controller
         $students = $classroom->students;
 
         $questions = Question::where('answer_by', '<>', null)->where('classroom_id', $classroom->id)->get()->sortByDesc('id')->take(5);
-        $ask_questions = Question::where('answer_by', null)->where('classroom_id', $classroom->id)->get();
+        $ask_questions = Question::where('answer_by', null)->where('classroom_id', $classroom->id)->get()->sortByDesc('id')->take(5);
 
         // $questions = $classroom->questions->sortByDesc('id')->take(5);
 
