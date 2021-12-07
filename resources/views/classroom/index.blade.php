@@ -190,12 +190,11 @@
 
                                     temp = '<div class="d-inline-block">';
                                     temp += '<div class="flex-row px-3 py-2 bg-white d-flex" style="border-radius: 0.5rem;">';
-                                    temp += '<img src="/asset/images/faces/face8.jpg" alt="avatar">';
                                     temp += '<div class="flex-col d-flex" style="padding-left: 0.7rem;">';
                                     temp += '<div class="lh-base">';
 
                                     if (data.question.visibility === 'anonymous') {
-                                        temp += '<div class="name">Anonymous Student</div>';
+                                        temp += '<div class="name">Anonymous</div>';
                                     }
                                     else {
                                         temp += '<div class="name">' + data.question.user.name + '</div>';
