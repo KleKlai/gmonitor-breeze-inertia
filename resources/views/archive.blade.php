@@ -5,6 +5,10 @@
         <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('success') }}</p>
     @endif
 
+    @if(Session::has('error'))
+        <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('error') }}</p>
+    @endif
+
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
         <div class="card-body">
