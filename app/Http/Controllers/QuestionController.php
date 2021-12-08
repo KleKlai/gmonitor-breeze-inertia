@@ -57,7 +57,7 @@ class QuestionController extends Controller
             'visibility'    =>  'Public',
         ]);
 
-        \Session::flash('success', 'Question send successfully');
+        \Session::flash('success', 'Question sent successfully');
 
         broadcast(new NewQuestion($model))->toOthers();
 

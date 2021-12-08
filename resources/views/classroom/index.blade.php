@@ -92,12 +92,8 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">
-                                        <div class="row">
-                                            <div class="col">
-                                                Ask questions to your students
-                                            </div>
-                                        </div>
+                                    <h4 class="">
+                                        Ask questions to your students
                                     </h4>
                                     <form class="forms-sample" action="{{ route('ask.question', $classroom) }}" method="POST">
                                         @csrf
