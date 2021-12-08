@@ -71,8 +71,8 @@
     </style>
 </head>
 
- <body>
-{{-- <body class="sidebar-icon-only"> --}}
+ {{-- <body> --}}
+<body class="sidebar-icon-only">
 
   <div class="container-scroller">
     @include('layouts.sub-layout.top-nav-bar')
