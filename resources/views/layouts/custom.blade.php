@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>GMonitor</title>
+  <link rel="stylesheet" href="{{ asset('asset/vendors') }}">
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('asset/vendors/feather/feather.css') }}">
   <link rel="stylesheet" href="{{ asset('asset/vendors/mdi/css/materialdesignicons.min.css') }}">
@@ -97,17 +98,17 @@
   <!-- container-scroller -->
   <!-- plugins:js -->
   <script src="{{ asset('asset/vendors/js/vendor.bundle.base.js') }}"></script>
-  {{-- <script src="{{ asset('asset/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script> --}}
+  <script src="{{ asset('asset/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <!-- End plugin js for this page -->
   @yield('script')
   <!-- inject:js -->
   <script src="{{ asset('asset/js/off-canvas.js') }}"></script>
-  {{-- <script src="{{ asset('asset/js/hoverable-collapse.js') }}"></script> --}}
-  {{-- <script src="{{ asset('asset/js/template.js') }}"></script>
+  <script src="{{ asset('asset/js/hoverable-collapse.js') }}"></script>
+  <script src="{{ asset('asset/js/template.js') }}"></script>
   <script src="{{ asset('asset/js/settings.js') }}"></script>
-  <script src="{{ asset('asset/js/todolist.js') }}"></script> --}}
+  <script src="{{ asset('asset/js/todolist.js') }}"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->

@@ -98,7 +98,7 @@ class AttendanceController extends Controller
             'is_open'       => true,
         ]);
 
-        \Session::flash('success', 'Attendance has been open');
+        \Session::flash('success', 'Attendance has been opened');
 
         return redirect()->back();
     }
@@ -118,7 +118,7 @@ class AttendanceController extends Controller
             'is_open' => false,
         ]);
 
-        \Session::flash('error', 'Attendance has been close');
+        \Session::flash('error', 'Attendance has been closed');
 
         return redirect()->back();
     }

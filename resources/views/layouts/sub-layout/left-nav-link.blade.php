@@ -2,19 +2,19 @@
     <ul class="nav">
         <li class="nav-item">
             <a class="nav-link" href="{{ route('dashboard') }}">
-                <i class="mdi mdi-grid-large menu-icon"></i>
+                <i class="icon-layers"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('archive-classroom-index') }}">
-                <i class="mdi mdi-archive menu-icon"></i>
+                <i class="icon-social-dropbox"></i>
                 <span class="menu-title">Archive</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('profile.password') }}">
-                <i class="mdi mdi-key-outline menu-icon"></i>
+                <i class="icon-key"></i>
                 <span class="menu-title">Update Password</span>
             </a>
         </li>

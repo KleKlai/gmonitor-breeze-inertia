@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------
  [Master Stylesheet]
 
-  Project:	Star Admin2 
+  Project:	Star Admin2
   Version:	1.2.1
 -------------------------------------------------------------------*/
 /*-------------------------------------------------------------------
@@ -206,6 +206,8 @@
     opacity: 1;
   }
 }
+
+@import 'material-icons/iconfont/material-icons.css';
 
 @-moz-keyframes bounce {
   0% {
