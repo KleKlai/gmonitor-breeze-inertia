@@ -137,7 +137,7 @@
                                     >
                                         <div class="text-blue-600" style="font-size: 0.8rem;">
                                             <div class="position-relative">
-                                                Student ask question
+                                                Students questions
                                                 <span class="top-0 position-absolute translate-middle badge rounded-pill bg-primary">
                                                     <span class="students-ask">0</span>
                                                     <span class="visually-hidden">unread messages</span>
