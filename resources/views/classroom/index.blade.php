@@ -148,7 +148,7 @@
                                   </h2>
                                   <div id="collapseQuestionsFromStudents" class="accordion-collapse collapse" aria-labelledby="headingQuestionsFromStudents" data-bs-parent="#accordionQuestionsFromStudents">
                                     <div class="accordion-body bg-light">
-                                        <ul class="px-4 mt-2 mb-0 border list-unstyled ask-list border-1 border-primary bg-primary" style="border-radius: 0.5rem;">
+                                        <ul class="px-4 mt-2 mb-0 border list-unstyled ask-list border-1 border-primary bg-primary" style="border-radius: 0.5rem; height: 16rem; overflow-y: scroll;">
                                             @foreach ($ask_questions as $ask_question)
                                                 <li class="my-4 bg-transparent">
                                                     <div class="d-inline-block">
