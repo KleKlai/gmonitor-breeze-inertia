@@ -71,8 +71,8 @@
     </style>
 </head>
 
-{{--  <body>  --}}
-<body class="sidebar-icon-only">
+ <body>
+{{-- <body class="sidebar-icon-only"> --}}
 
   <div class="container-scroller">
     @include('layouts.sub-layout.top-nav-bar')
@@ -112,9 +112,10 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->
+  <script src="https://kit.fontawesome.com/214c0b2f07.js" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
+    {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
 </body>
 
 </html>
