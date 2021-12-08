@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{ asset('asset/vendors') }}">
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('asset/vendors/feather/feather.css') }}">
-  <link rel="stylesheet" href="{{ asset('mdi/css/icon.css') }}">
+  <link rel="stylesheet" href="{{ asset('asset/mdi/css/materialdesignicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('asset/vendors/ti-icons/css/themify-icons.css') }}">
   <link rel="stylesheet" href="{{ asset('asset/vendors/typicons/typicons.css') }}">
   <link rel="stylesheet" href="{{ asset('asset/vendors/simple-line-icons/css/simple-line-icons.css') }}">
