@@ -98,22 +98,22 @@
   <!-- container-scroller -->
   <!-- plugins:js -->
   <script src="{{ asset('asset/vendors/js/vendor.bundle.base.js') }}"></script>
-  {{-- <script src="{{ asset('asset/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script> --}}
+  <script src="{{ asset('asset/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <!-- End plugin js for this page -->
   @yield('script')
   <!-- inject:js -->
   <script src="{{ asset('asset/js/off-canvas.js') }}"></script>
-  {{-- <script src="{{ asset('asset/js/hoverable-collapse.js') }}"></script> --}}
-  {{-- <script src="{{ asset('asset/js/template.js') }}"></script>
+  <script src="{{ asset('asset/js/hoverable-collapse.js') }}"></script>
+  <script src="{{ asset('asset/js/template.js') }}"></script>
   <script src="{{ asset('asset/js/settings.js') }}"></script>
-  <script src="{{ asset('asset/js/todolist.js') }}"></script> --}}
+  <script src="{{ asset('asset/js/todolist.js') }}"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->
 
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 
