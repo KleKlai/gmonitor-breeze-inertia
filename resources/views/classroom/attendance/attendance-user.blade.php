@@ -18,7 +18,7 @@
                         <a href="#" style="text-decoration: none;">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
-                                <i class="mdi mdi-calendar text-muted me-1"></i>
+                                <i class="fas fa-calendar text-muted me-1"></i>
                                 <p class="mb-0 text-small text-muted">{{ $user->pivot->status }} - {{ $user->created_at->format('g:i a') }}</p>
                                 </div>
                             </div>

@@ -18,7 +18,7 @@
                     <h4 class="card-title card-title-dash">Classroom List</h4>
                 </div>
                     <div id="performance-line-legend">
-                        <a href="{{ route('classroom.create') }}"><i class="mdi mdi-plus"></i></a>
+                        <a href="{{ route('classroom.create') }}"><i class="fas fa-plus"></i></a>
                     </div>
                 </div>
             </h4>
