@@ -5,11 +5,11 @@
 @section('body')
 
 @if(Session::has('success'))
-        <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('success') }}</p>
+    <p id="alert" class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('success') }}</p>
 @endif
 
 @if(Session::has('error'))
-    <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('error') }}</p>
+    <p id="alert" class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('error') }}</p>
 @endif
 
 <div class="row">
@@ -421,6 +421,16 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+    <script>
+        setTimeout(function () {
+            if ($(".alert").is(":visible")){
+                //you may add animate.css class for fancy fadeout
+                $(".alert").fadeOut("fast");
+            }
+        }, 3000);
+    </script>
+
     <script type="text/javascript">
 
         $('.show_confirm').click(function(event) {

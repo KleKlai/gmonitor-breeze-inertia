@@ -2,11 +2,11 @@
 
 @section('body')
     @if(Session::has('success'))
-        <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('success') }}</p>
+        <p id="alert" class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('success') }}</p>
     @endif
 
     @if(Session::has('error'))
-        <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('error') }}</p>
+        <p id="alert" class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('error') }}</p>
     @endif
 
     <div class="col-lg-12 grid-margin stretch-card">
@@ -58,4 +58,15 @@
         </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script>
+    setTimeout(function () {
+        if ($(".alert").is(":visible")){
+            //you may add animate.css class for fancy fadeout
+            $(".alert").fadeOut("fast");
+        }
+    }, 3000);
+</script>
 @endsection
