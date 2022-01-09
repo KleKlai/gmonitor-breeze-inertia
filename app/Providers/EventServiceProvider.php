@@ -26,7 +26,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\AskQuestion' => [
             'App\Listeners\SendAskQuestionNotification'
-        ]
+        ],
+        'App\Events\QuestionNew' => [
+            'App\Listeners\SendQuestionNewNotification'
+        ],
     ];
 
     /**

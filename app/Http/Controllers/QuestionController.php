@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\NewQuestion;
+use Auth;
 use App\Models\Question;
 use App\Models\Classroom;
+use App\Events\NewQuestion;
+use App\Events\QuestionNew;
 use Illuminate\Http\Request;
-use Auth;
 
 class QuestionController extends Controller
 {
@@ -60,6 +61,7 @@ class QuestionController extends Controller
         \Session::flash('success', 'Question sent successfully');
 
         broadcast(new NewQuestion($model))->toOthers();
+        broadcast(new QuestionNew($model))->toOthers();
 
         return redirect()->back();
     }
